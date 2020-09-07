@@ -24,3 +24,9 @@ Needed things:
 - Raspberry PI (Zero is enough).
 - 2.7inch e-Paper HAT. (I bought mine here: https://www.amazon.de/gp/product/B07FFMH858/ref=ppx_yo_dt_b_asin_title_o04_s00)
 - SD card (4Gb is enough).
+
+
+Installation:
+Follow the steps on the next files...
+- Installation_Needed_Software
+- Installation_OS 
