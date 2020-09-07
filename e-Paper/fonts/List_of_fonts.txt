@@ -1,0 +1,19 @@
+Here we have some font files to be installed on the Raspberry PI to be used to show the information.
+
+List:
+- Bungee_Inline.zip
+- Bungee_Outline.zip
+- Bungee_Shade.zip
+- droid-sans.zip
+- Jacques_Francois_Shadow.zip
+- Londrina_Outline.zip
+- Londrina_Shadow.zip
+- Londrina_Sketch.zip
+- Oswald.zip
+- Roboto.zip
+- Vast_Shadow.zip
+
+You have to unzip them and to copy them onto the /usr/shared/font/truetype folder.
+
+Some are not used, but you can change a bit the code to use them.
+In that case, you have to change the possion of the text to adjust it on the screen.
