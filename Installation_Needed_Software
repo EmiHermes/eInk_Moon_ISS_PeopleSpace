@@ -1,0 +1,61 @@
+Ok, now we have a running Raspberry PI with the latest software and all the basic to connect to it.
+
+It's the moment to start installing the needed software to control the e-Paper HAT.
+
+If you didn't plug the HAT on your Raspberry PI, now is the latest moment to connect it.
+Switch off your Raspberry PI and put the HAT on it.
+
+for the next steps you can follow the instructions from Waveshare or follow it with the next steps....
+(https://www.waveshare.com/wiki/2.7inch_e-Paper_HAT)
+
+Install BCM2835 libraries:
+
+wget http://www.airspayce.com/mikem/bcm2835/bcm2835-1.60.tar.gz
+tar zxvf bcm2835-1.60.tar.gz
+cd bcm2835-1.60/
+sudo ./configure
+sudo make
+sudo make check
+sudo make install
+#For more details, please refer to http://www.airspayce.com/mikem/bcm2835/
+
+
+Install wiringPi libraries:
+
+sudo apt-get install wiringpi
+#For Pi 4, you need to update it：
+cd /tmp wget https://project-downloads.drogon.net/wiringpi-latest.deb
+sudo dpkg -i wiringpi-latest.deb gpio -v
+#You will get 2.52 information if you install it correctly
+
+Install Python libraries:
+(If you updated the SO with the latest version, all of these steps will be like "Requirement already satisfied").
+
+sudo apt-get update
+sudo apt-get install python3-pip
+sudo apt-get install python3-pil
+sudo apt-get install python3-numpy
+sudo pip3 install RPi.GPIO
+sudo pip3 install spidev
+
+
+Now you can download the examples from Waveshare:
+
+sudo git clone https://github.com/waveshare/e-Paper
+cd e-Paper/RaspberryPi\&JetsonNano/
+
+I recommend you to remove some folders:
+- e-Paper/Arduino (It's a Raspberry PI).
+- e-Paper/STM32 (It's a Raspberry PI).
+- e-Paper/Raspberry & JetsonNano/c (we'll use python on this project).
+- e-Paper/Raspberry & JetsonNano/python/examples (you don't need them if all works).
+
+you will not use them, and you don't need them on a Raspberry PI.
+
+I recommend you to move the "lib" folder a bit back to use it easily:
+
+sudo mv lib /home/pi/e-Paper/
+
+All the needed software is installed.
+
+The next step is our code!
