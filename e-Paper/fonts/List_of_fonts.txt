@@ -13,7 +13,7 @@ List:
 - Roboto.zip
 - Vast_Shadow.zip
 
-You have to unzip them and to copy them onto the /usr/shared/font/truetype folder.
+You have to unzip them and to copy them onto the /usr/share/fonts/truetype/google/ folder.
 
 Some are not used, but you can change a bit the code to use them.
 In that case, you have to change the possion of the text to adjust it on the screen.
