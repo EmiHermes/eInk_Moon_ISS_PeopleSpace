@@ -1,0 +1,23 @@
+The first step, as always, is to prepare your Raspberry PI with the latest OS.
+
+- Download the latest OS (with desktop) from here: https://www.raspberrypi.org/downloads/raspberry-pi-os/
+- Write the image on an empty SD card.
+- create an empty file "ssh" to enable the SSH connection.
+- Save the "wpa_supplicant.conf" file on the SD card to have your Wifi configured to connect to your Raspberry PI via SSH (you have it prepared on your computer, I know it).
+
+Start your Raspberry Pi.
+
+Connect to it via SSH (you can also do it if you have a monitor, keyboard and mouse, but I don't have and I prefer to connect via SSH) and update it....
+
+sudo apt-get update -y
+sudo apt-get upgrade -y
+
+Now, you have to enable VNC to be able to connect remotely and SPI for the e-Paper HAT:
+
+
+sudo raspi-config
+
+Interfacing Options > VNC > Yes
+Interfacing Options > SPI > Yes
+
+And reboot it.
