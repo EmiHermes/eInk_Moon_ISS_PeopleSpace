@@ -12,7 +12,7 @@ Wait, this HAT has 4 buttons, and then, I need 4 data to be shown...
 - Where is now the ISS?
 - How many people are now in the space?
 - In which phase is the Moon?
-- And what more?????
+- Is it going to rain?
 
 This project is to show data on a e-Paper screen, and the refresh is not every second, it could be every hour or every 5 minutes, depending on what you are showing.
 For example, the phase of the Monn is not going to change until some hours, but tht ISS is moving and probably you want to show it every 5 minutes, but not every second.
