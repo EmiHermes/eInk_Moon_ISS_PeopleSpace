@@ -31,7 +31,7 @@ class TimePressed():
 
 actualButton = 0                    # Last pressed Button
 timeToRefesh = 0                    # Time between Button press
-timeToRefeshBtn1 = 0                # Time to refresh the Action of Button 1
+timeToRefeshBtn1 = 30 #1800             # Time to refresh the Action of Button 1
 timeToRefeshBtn2 = 25 #3600             # Time to refresh the Action of Button PeopleInSpace
 timeToRefeshBtn3 = 25 #300              # Time to refresh the Action of Button WhereIsIIS
 timeToRefeshBtn4 = 3600             # Time to refresh the Action of Button 4
@@ -50,13 +50,14 @@ fontBan20 = ImageFont.truetype('/usr/share/fonts/truetype/google/Bangers-Regular
 fontBan25 = ImageFont.truetype('/usr/share/fonts/truetype/google/Bangers-Regular.ttf', 25)
 fontBan30 = ImageFont.truetype('/usr/share/fonts/truetype/google/Bangers-Regular.ttf', 30)
 fontBan50 = ImageFont.truetype('/usr/share/fonts/truetype/google/Bangers-Regular.ttf', 50)
+fontBan55 = ImageFont.truetype('/usr/share/fonts/truetype/google/Bangers-Regular.ttf', 55)
+fontBan60 = ImageFont.truetype('/usr/share/fonts/truetype/google/Bangers-Regular.ttf', 60)
 
 fontIndie10 = ImageFont.truetype('/usr/share/fonts/truetype/google/IndieFlower-Regular.ttf', 10)
 fontIndie15 = ImageFont.truetype('/usr/share/fonts/truetype/google/IndieFlower-Regular.ttf', 15)
 fontIndie20 = ImageFont.truetype('/usr/share/fonts/truetype/google/IndieFlower-Regular.ttf', 20)
 fontIndie25 = ImageFont.truetype('/usr/share/fonts/truetype/google/IndieFlower-Regular.ttf', 25)
 fontIndie30 = ImageFont.truetype('/usr/share/fonts/truetype/google/IndieFlower-Regular.ttf', 30)
-
 
 fontBunIn10 = ImageFont.truetype('/usr/share/fonts/truetype/google/BungeeInline-Regular.ttf', 10)
 fontBunIn15 = ImageFont.truetype('/usr/share/fonts/truetype/google/BungeeInline-Regular.ttf', 15)
@@ -145,12 +146,10 @@ def PeopleInSpace():
     #draw.text((25, 60), stringToShow2, font = fontVastShad10, fill = 0)
     draw.text((25, 60), stringToShow2, font = fontOswBol15, fill = 0)
     
-    
+    # Paint all on the screen
     epd.display(epd.getbuffer(HBlackImage))
 
-    # Reset timeToRefresh
-    #global timeToRefesh = 0
-    
+
     
     
 def WhereIsIIS():
@@ -198,8 +197,9 @@ def WhereIsIIS():
     
     HBlackImage.paste(issLogo, ((int)(x-10), (int)(y-10)))
     
-    
+    # Paint all on the screen
     epd.display(epd.getbuffer(HBlackImage))
+
 
     
 def MoonPhase():
@@ -254,8 +254,7 @@ def MoonPhase():
     print('IsPhaseLimit: ' + str(isPhaseLimit))
     print('TimeEvent: ' + str(timeEvent))
     print('** ** ** ** ** ** ** **')
-    
-    
+        
         
     if (phaseName=="New Moon"):
         photoMoon = 'Moon/phase_0.bmp'
@@ -285,7 +284,7 @@ def MoonPhase():
     draw.rectangle((176, 0, 298, 176), fill = 0)
 
     stringToShow1 = str(dayNumber) + ' ' + str(monthName)
-    stringToShow2 = 'Sunday'
+    stringToShow2 = str(dayName)
     stringToShow3 = str(phaseName)
     stringToShow4 = str(distRounded) + ' Km'
     stringToShow5 = str("%.1f" % lighting) + '%'
@@ -298,10 +297,254 @@ def MoonPhase():
     draw.text((170, 85), stringToShow4, font = fontBan20, fill = 255) 
     draw.text((135, 120), stringToShow5, font = fontBan50, fill = 255) 
     
+    # Paint all on the screen
     epd.display(epd.getbuffer(HBlackImage))
     
     
     
+    
+def weatherForecast():
+    url = "http://api.openweathermap.org/data/2.5/forecast?"
+    #url = url + "q={city_name}" 
+    #url = url + "q=Düsseldorf"        # ASCII problems  !!!
+    url = url + "id=2934246"
+    #url = url + "&appid={your_API_key}" 
+    url = url + "&appid=ed7e067528f650e0c2e7e1d5b8e84866"
+    url = url + "&units=metric"        # In Metric 
+    url = url + "&cnt=6"               # Only 6 results
+    
+    print(url)
+    print('/// Calling ///')
+    response = urllib.request.urlopen(url)
+    result = json.loads(response.read())
+    data = result['list']
+    cityData = result['city']
+    
+    print('***** RESULT *****')    
+    print(cityData)
+    print('******************')
+    print(data)
+    print('******************')
+    
+    # City information
+    cityName = cityData['name']
+    citySunrise = datetime.utcfromtimestamp(cityData['sunrise'])
+    citySunset = datetime.utcfromtimestamp(cityData['sunset'])
+    citySunriseTime = citySunrise.strftime('%H:%M:%S')
+    citySunsetTime = citySunset.strftime('%H:%M:%S')
+    
+    # Weather 0
+    fore0DT = datetime.utcfromtimestamp(data[0]['dt'])
+    fore0DTDay = fore0DT.strftime('%d/%m')
+    fore0DTTime = fore0DT.strftime('%H:%M')
+    fore0DTText = data[0]['dt_txt']
+    # Temperature
+    fore0MainTemp = round(data[0]['main']['temp'], 1)
+    fore0MainTempMin = data[0]['main']['temp_min']
+    fore0MainTempMax = data[0]['main']['temp_max']
+    fore0MainTempLike = round(data[0]['main']['feels_like'], 1)
+    fore0MainHumidity = data[0]['main']['humidity']
+    fore0MainPress = data[0]['main']['pressure']
+    # Sky
+    fore0SkyDes = data[0]['weather'][0]['description']
+    fore0SkyIcon = data[0]['weather'][0]['icon']
+    fore0SkyIconFile = 'Weather/' + str(fore0SkyIcon) + '@4x.bmp'
+    fore0SkyCloud = str(data[0]['clouds']['all']) + '%'
+    fore0SkyRain = str(data[0]['pop']) + '%'
+    fore0WindSpeed = data[0]['wind']['speed']
+    fore0WindDirec = data[0]['wind']['deg']
+    # Rain
+    if 'rain' not in data[0]:
+        fore0Rain = '0%'
+        fore0RainIs = False
+    else:
+        fore0Rain = str(data[0]['rain']['3h']) + '%'
+        fore0RainIs = True
+    # Snow
+    if 'snow' not in data[0]:
+        fore0Snow = '0%'
+        fore0SnowIs = False
+    else:
+        fore0Snow = str(data[0]['snow']['3h']) + '%'
+        fore0SnowIs = True    
+    
+    # Wind direction
+    if (fore0WindDirec >= 348.75) and (fore0WindDirec < 11.24):
+        fore0Wind = str(fore0WindSpeed) + 'N'
+    if (fore0WindDirec >= 11.25) and (fore0WindDirec < 33.74):
+        fore0Wind = str(fore0WindSpeed) + 'NNE'
+    if (fore0WindDirec >= 33.75) and (fore0WindDirec < 56.24):
+        fore0Wind = str(fore0WindSpeed) + 'NE'
+    if (fore0WindDirec >= 56.25) and (fore0WindDirec < 78.74):
+        fore0Wind = str(fore0WindSpeed) + 'ENE'
+    if (fore0WindDirec >= 78.75) and (fore0WindDirec < 101.24):
+        fore0Wind = str(fore0WindSpeed) + 'E'
+    if (fore0WindDirec >= 101.25) and (fore0WindDirec < 123.44):
+        fore0Wind = str(fore0WindSpeed) + 'ESE'
+    if (fore0WindDirec >= 123.75) and (fore0WindDirec < 146.24):
+        fore0Wind = str(fore0WindSpeed) + 'SE'
+    if (fore0WindDirec >= 146.25) and (fore0WindDirec < 168.74):
+        fore0Wind = str(fore0WindSpeed) + 'SSE'
+    if (fore0WindDirec >= 168.75) and (fore0WindDirec < 191.24):
+        fore0Wind = str(fore0WindSpeed) + 'S'
+    if (fore0WindDirec >= 191.25) and (fore0WindDirec < 213.74):
+        fore0Wind = str(fore0WindSpeed) + 'SSW'
+    if (fore0WindDirec >= 213.75) and (fore0WindDirec < 236.24):
+        fore0Wind = str(fore0WindSpeed) + 'SW'
+    if (fore0WindDirec >= 236.25) and (fore0WindDirec < 258.74):
+        fore0Wind = str(fore0WindSpeed) + 'WSW'
+    if (fore0WindDirec >= 258.75) and (fore0WindDirec < 281.24):
+        fore0Wind = str(fore0WindSpeed) + 'W'
+    if (fore0WindDirec >= 281.25) and (fore0WindDirec < 303.74):
+        fore0Wind = str(fore0WindSpeed) + 'WNW'
+    if (fore0WindDirec >= 303.75) and (fore0WindDirec < 326.24):
+        fore0Wind = str(fore0WindSpeed) + 'NW'
+    if (fore0WindDirec >= 326.25) and (fore0WindDirec < 348.74):
+        fore0Wind = str(fore0WindSpeed) + 'NNW'
+    
+    
+    # Weather 1
+    fore1DT = datetime.utcfromtimestamp(data[1]['dt'])
+    fore1DTDay = fore1DT.strftime('%d/%m')
+    fore1DTTime = fore1DT.strftime('%H:%M')
+    fore1DTText = data[1]['dt_txt']
+    # Temperature
+    fore1MainTemp = round(data[1]['main']['temp'], 1)
+    fore1MainTempMin = data[1]['main']['temp_min']
+    fore1MainTempMax = data[1]['main']['temp_max']
+    fore1MainTempLike = round(data[1]['main']['feels_like'], 1)
+    fore1MainHumidity = data[1]['main']['humidity']
+    fore1MainPress = data[1]['main']['pressure']
+    # Sky
+    fore1SkyDes = data[1]['weather'][0]['description']
+    fore1SkyIcon = data[1]['weather'][0]['icon']
+    fore1SkyIconFile = 'Weather/' + str(fore0SkyIcon) + '@2x.bmp'
+    fore1SkyCloud = str(data[1]['clouds']['all']) + '%'
+    fore1SkyRain = str(data[1]['pop']) + '%'
+    # Rain
+    if 'rain' not in data[1]:
+        fore1Rain = '0%'
+        fore1RainIs = False
+    else:
+        fore1Rain = str(data[1]['rain']['3h']) + '%'
+        fore1RainIs = True
+    # Snow
+    if 'snow' not in data[1]:
+        fore1Snow = '0%'
+        fore1SnowIs = False
+    else:
+        fore1Snow = str(data[1]['snow']['3h']) + '%'
+        fore1SnowIs = True
+    
+    
+    # Weather 2
+    fore2MainTempMin = data[2]['main']['temp_min']
+    fore2MainTempMax = data[2]['main']['temp_max']
+    # Weather 3
+    fore3MainTempMin = data[3]['main']['temp_min']
+    fore3MainTempMax = data[3]['main']['temp_max']
+    # Weather 4
+    fore4MainTempMin = data[4]['main']['temp_min']
+    fore4MainTempMax = data[4]['main']['temp_max']
+    # Weather 5
+    fore5MainTempMin = data[5]['main']['temp_min']
+    fore5MainTempMax = data[5]['main']['temp_max']
+    # MinTemperature in the next hours 
+    foreMainTempMin = fore0MainTempMin
+    if (fore1MainTempMin < foreMainTempMin):
+        foreMainTempMin = fore1MainTempMin
+    if (fore2MainTempMin < foreMainTempMin):
+        foreMainTempMin = fore2MainTempMin
+    if (fore3MainTempMin < foreMainTempMin):
+        foreMainTempMin = fore3MainTempMin
+    if (fore4MainTempMin < foreMainTempMin):
+        foreMainTempMin = fore4MainTempMin
+    if (fore5MainTempMin < foreMainTempMin):
+        foreMainTempMin = fore5MainTempMin
+    foreMainTempMin = round(foreMainTempMin, 1)
+    # MaxTemperature in the next hours  
+    foreMainTempMax = fore0MainTempMax
+    if (fore1MainTempMax > foreMainTempMax):
+        foreMainTempMax = fore1MainTempMax
+    if (fore2MainTempMax > foreMainTempMax):
+        foreMainTempMax = fore2MainTempMax
+    if (fore3MainTempMax > foreMainTempMax):
+        foreMainTempMax = fore3MainTempMax
+    if (fore4MainTempMax > foreMainTempMax):
+        foreMainTempMax = fore4MainTempMax
+    if (fore5MainTempMax > foreMainTempMax):
+        foreMainTempMax = fore5MainTempMax
+    foreMainTempMax = round(foreMainTempMax, 1) 
+        
+    # Traces of Information...
+    print('City: ' + str(cityName))
+    print('Sunrise: ' + str(citySunriseTime))
+    print('Sunset: ' + str(citySunsetTime))
+    print()
+    print('Time: ' + str(fore0DTTime))
+    print('Day: ' + str(fore0DTDay))
+    print('DayText: ' + str(fore0DTText))
+    print('Temp: ' + str(fore0MainTemp))
+    print('TempMin: ' + str(fore0MainTempMin))
+    print('TempMax: ' + str(fore0MainTempMax))
+    print('TempLike: ' + str(fore0MainTempLike))
+    print('Humidity: ' + str(fore0MainHumidity))
+    print('Pression: ' + str(fore0MainPress))
+    print('Min: ' + str(foreMainTempMin))
+    print('Max: ' + str(foreMainTempMax))  
+    print('Descr: ' + str(fore0SkyDes))
+    print('Icon: ' + str(fore0SkyIcon))
+    print('IconFile: ' + str(fore0SkyIconFile))
+    print('Clouds: ' + str(fore0SkyCloud))
+    print('Rain: ' + str(fore0SkyRain))
+    print('WindSpeed: ' + str(fore0WindSpeed))
+    print('WindDirec: ' + str(fore0WindDirec))
+    print('Wind: ' + str(fore0Wind))
+    print('IsRain: ' + str(fore0Rain))
+    print('ISSnow: ' + str(fore0Snow))
+    print()
+    print('-- After --')
+    print('Time: ' + str(fore1DTTime))
+    print('Day: ' + str(fore1DTDay))
+    print('DayText: ' + str(fore1DTText))
+    print('Icon: ' + str(fore1SkyIcon))
+    print('IconFile: ' + str(fore1SkyIconFile))
+    print('Descr: ' + str(fore1SkyDes))    
+    print('Clouds: ' + str(fore1SkyCloud))
+    print('Rain: ' + str(fore1SkyRain))
+            
+    
+    HBlackImage = Image.new('1', (epd2in7.EPD_HEIGHT, epd2in7.EPD_WIDTH), 255)  # 298*176
+    imgForecastToday = Image.open(fore0SkyIconFile)
+    HBlackImage.paste(imgForecastToday, (0, -20))
+    draw = ImageDraw.Draw(HBlackImage)
+    imgForecastAfter = Image.open(fore1SkyIconFile)
+    HBlackImage.paste(imgForecastAfter, (180, 86))
+    
+
+    # Now...
+    draw.text((2, 1), str(cityName), font = fontBan20, fill = 0)
+    draw.text((2, 20), str(citySunriseTime) + ' -> ' + str(citySunsetTime), font = fontBan20, fill = 0)
+    draw.text((100, 1), str(fore0DTDay) + ' ' + str(fore0DTTime), font = fontBan20, fill = 0) 
+    draw.text((2, 40), str(fore0SkyDes), font = fontBan25, fill = 0)
+    draw.text((2, 65), 'Clouds: ' + str(fore0SkyCloud), font = fontBan15, fill = 0) 
+    draw.text((2, 80), 'Rain:  ' + str(fore0SkyRain), font = fontBan15, fill = 0)
+    draw.text((2, 95), 'Wind:  ' + str(fore0Wind), font = fontBan20, fill = 0)
+    draw.text((2, 120), str(fore0MainTemp), font = fontBan60, fill = 0)  
+    draw.text((100, 155), str(foreMainTempMax) + 'C ' + str(foreMainTempMin) + 'C', font = fontBan20, fill = 0)
+    
+    # After...
+    draw.text((210, 20), str(fore1DTDay), font = fontBan20, fill = 0) 
+    draw.text((220, 40), str(fore1DTTime), font = fontBan20, fill = 0)    
+    if (fore1RainIs == True):
+        draw.text((190, 65), 'Rain:   ' + str(fore1Rain), font = fontBan15, fill = 0)
+    if (fore1SnowIs == True):
+        draw.text((190, 80), 'Snow: ' + str(fore1Snow), font = fontBan15, fill = 0)   
+    draw.text((215, 145), str(fore1MainTemp), font = fontBan30, fill = 0)
+    
+    
+    # Paint all on the screen
+    epd.display(epd.getbuffer(HBlackImage))
     
     
     
@@ -324,6 +567,7 @@ def printToDisplay(string):
     epd.display(epd.getbuffer(HBlackImage))
     print('*****4')
     
+    
 # Select a pressed button
 def handleBtnPress(btn):
     # Get the button pin number
@@ -335,7 +579,10 @@ def handleBtnPress(btn):
     
     
     if (pinNum==5):        
-        printToDisplay('This is my first \nRPi project.')
+        #printToDisplay('This is my first \nRPi eInk project.')
+        btn.timePressed.value = 0
+        weatherForecast()
+        btn.timePressed.value = 0
     elif (pinNum==6):
         btn.timePressed.value = 0
         PeopleInSpace()
@@ -368,12 +615,17 @@ while True:
         btn3.when_pressed = handleBtnPress
         btn4.when_pressed = handleBtnPress
 
-        #print('waiting... ' + str(timeToRefesh) + '  -> ' + str(actualButton))
-        #print('waiting..... ' + str(timePressed.value) + '  -> ' + str(actualButton))
         time.sleep(0.5)
         
-        print('-- (' + str(Button.buttonNumber.value) + ') - ' + str(Button.timePressed.value))
+        if (Button.buttonNumber.value == 0):
+            print('-- (' + str(Button.buttonNumber.value) + ') - ' + str(Button.timePressed.value))
         
+        if (Button.buttonNumber.value == 5):
+            print('5........' + str(Button.timePressed.value) + ' / ' + str(timeToRefeshBtn1))
+            if (Button.timePressed.value >= timeToRefeshBtn1):
+                Button.timePressed.value = 0
+                weatherForecast()
+                
         if (Button.buttonNumber.value == 6):
             print('6........' + str(Button.timePressed.value) + ' / ' + str(timeToRefeshBtn2))
             if (Button.timePressed.value >= timeToRefeshBtn2):
@@ -392,7 +644,8 @@ while True:
                 Button.timePressed.value = 0
                 MoonPhase()
     
-    except KeyboardInterrupt:    
-        #logging.info("ctrl + c:")
+    
+    except KeyboardInterrupt: 
         epd2in7.epdconfig.module_exit()
         exit()
+        
