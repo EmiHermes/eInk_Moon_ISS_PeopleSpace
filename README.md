@@ -23,10 +23,12 @@ For example, the phase of the Monn is not going to change until some hours, but 
 
 This is a good project to be used with the eInk screen.
 
-![Alt text](ISS.jpg?raw=true "Where is the ISS")
-![Alt text](People_Space.jpg?raw=true "Who is on the Space?")
-![Alt text](Moon_phase.jpg?raw=true "Moon Phase")
-![Alt text](WeatherForecast.jpg?raw=true "Weather Forecast")
+[![GIF](ShowInformation.gif)]
+
+![ISS](ISS.jpg?raw=true "Where is the ISS")
+![Space](People_Space.jpg?raw=true "Who is on the Space?")
+![Moon](Moon_phase.jpg?raw=true "Moon Phase")
+![Weather](WeatherForecast.jpg?raw=true "Weather Forecast")
 
 
 Needed things:
