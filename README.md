@@ -26,7 +26,7 @@ This is a good project to be used with the eInk screen.
 ![Alt text](ISS.jpg?raw=true "Where is the ISS")
 ![Alt text](People_Space.jpg?raw=true "Who is on the Space?")
 ![Alt text](Moon_phase.jpg?raw=true "Moon Phase")
-![Alt text](Message.jpg?raw=true "Message")
+![Alt text](WeatherForecast.jpg?raw=true "Weather Forecast")
 
 
 Needed things:
