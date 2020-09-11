@@ -14,15 +14,19 @@ Wait, this HAT has 4 buttons, and then, I need 4 data to be shown...
 - In which phase is the Moon?
 - Is it going to rain?
 
+Well, I made it on one evening and the "FrontEnd" was ended a few days after.
+Don't complain about how the information is shown, I don't like to make this part :)
+
+
 This project is to show data on a e-Paper screen, and the refresh is not every second, it could be every hour or every 5 minutes, depending on what you are showing.
 For example, the phase of the Monn is not going to change until some hours, but tht ISS is moving and probably you want to show it every 5 minutes, but not every second.
+
+This is a good project to be used with the eInk screen.
 
 ![Alt text](ISS.jpg?raw=true "Where is the ISS")
 ![Alt text](People_Space.jpg?raw=true "Who is on the Space?")
 ![Alt text](Moon_phase.jpg?raw=true "Moon Phase")
 ![Alt text](Message.jpg?raw=true "Message")
-
-This is a good project to be used with the eInk screen.
 
 
 Needed things:
