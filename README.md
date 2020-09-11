@@ -57,14 +57,14 @@ Check if the service is running:
 
 The output should be similar to:
 
-*● ShowInfo.service - ShowInfo
+*● ShowInfo.service - ShowInfo*
    Loaded: loaded (/etc/systemd/system/ShowInfo.service; disabled; vendor preset: enabled)
    Active: active (running) since Fri 2020-09-11 15:17:16 CEST; 14s ago
  Main PID: 1453 (python3)
    CGroup: /system.slice/ShowInfo.service
            └─1453 /usr/bin/python3 ShowInfo.py
 
-Sep 11 15:17:16 eInk systemd[1]: Started ShowInfo.*
+*Sep 11 15:17:16 eInk systemd[1]: Started ShowInfo.*
 
 If the service is running fine, you can enable it and reboot the Raspberry Pi to load it automatically during boot:
 
