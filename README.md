@@ -35,3 +35,39 @@ Installation:
 Follow the steps on the next files...
 - Installation_OS
 - Installation_Needed_Software
+
+As an alternative, the Python script can be started during boot by creating a service - more info at https://www.raspberrypi.org/documentation/linux/usage/systemd.md
+
+The file "ShowInfo.service" is on the folder.
+Copy the ShowInfo.service file into /etc/systemd/system as root:
+
+sudo cp ShowInfo.service /etc/systemd/system/
+
+Start the service:
+
+sudo systemctl start ShowInfo.service
+
+Check if the service is running:
+
+sudo systemctl status ShowInfo.service
+
+The output should be similar to:
+
+● ShowInfo.service - ShowInfo
+   Loaded: loaded (/etc/systemd/system/ShowInfo.service; disabled; vendor preset: enabled)
+   Active: active (running) since Fri 2020-09-11 15:17:16 CEST; 14s ago
+ Main PID: 1453 (python3)
+   CGroup: /system.slice/ShowInfo.service
+           └─1453 /usr/bin/python3 ShowInfo.py
+
+Sep 11 15:33:17 eInk systemd[1]: Started ShowInfo.
+
+
+If the service is running fine, you can enable it and reboot the Raspberry Pi to load it automatically during boot:
+
+sudo systemctl enable ShowInfo.service
+
+To stop the service:
+
+sudo systemctl stop ShowInfo.service
+
