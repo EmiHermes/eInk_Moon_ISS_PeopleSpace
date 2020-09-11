@@ -36,7 +36,7 @@ actualButton = 0                    # Last pressed Button
 timeToRefesh = 0                    # Time between Button press
 timeToRefeshBtn1 = 1800             # Time to refresh the Action of Button WeatherForecast
 timeToRefeshBtn2 = 3600             # Time to refresh the Action of Button PeopleInSpace
-timeToRefeshBtn3 = 300              # Time to refresh the Action of Button WhereIsIIS
+timeToRefeshBtn3 = 60               # Time to refresh the Action of Button WhereIsIIS
 timeToRefeshBtn4 = 3600             # Time to refresh the Action of Button MoonPhase
 
 Button.buttonNumber = ButtonNumber()
@@ -352,7 +352,6 @@ def WeatherForecast():
     #url = url + "q=Düsseldorf"        # ASCII problems  !!!
     url = url + "id=2934246"
     #url = url + "&appid={your_API_key}" 
-    url = url + "&appid=ed7e067528f650e0c2e7e1d5b8e84866"
     url = url + "&units=metric"        # In Metric 
     url = url + "&cnt=6"               # Only 6 results
     
