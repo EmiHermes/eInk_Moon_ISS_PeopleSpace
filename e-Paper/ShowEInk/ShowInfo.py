@@ -28,16 +28,21 @@ class ButtonNumber():
 class TimePressed():
     value = 0
 
+class ISS():
+    positions = []
+
 
 actualButton = 0                    # Last pressed Button
 timeToRefesh = 0                    # Time between Button press
-timeToRefeshBtn1 = 30 #1800             # Time to refresh the Action of Button 1
-timeToRefeshBtn2 = 25 #3600             # Time to refresh the Action of Button PeopleInSpace
-timeToRefeshBtn3 = 25 #300              # Time to refresh the Action of Button WhereIsIIS
-timeToRefeshBtn4 = 3600             # Time to refresh the Action of Button 4
+timeToRefeshBtn1 = 1800             # Time to refresh the Action of Button WeatherForecast
+timeToRefeshBtn2 = 3600             # Time to refresh the Action of Button PeopleInSpace
+timeToRefeshBtn3 = 300              # Time to refresh the Action of Button WhereIsIIS
+timeToRefeshBtn4 = 3600             # Time to refresh the Action of Button MoonPhase
 
 Button.buttonNumber = ButtonNumber()
 Button.timePressed = TimePressed()
+Button.ISS= ISS()
+
 
 epd = epd2in7.EPD()
 epd.init()
@@ -64,31 +69,37 @@ fontBunIn15 = ImageFont.truetype('/usr/share/fonts/truetype/google/BungeeInline-
 fontBunIn20 = ImageFont.truetype('/usr/share/fonts/truetype/google/BungeeInline-Regular.ttf', 20)
 fontBunIn25 = ImageFont.truetype('/usr/share/fonts/truetype/google/BungeeInline-Regular.ttf', 25)
 fontBunIn30 = ImageFont.truetype('/usr/share/fonts/truetype/google/BungeeInline-Regular.ttf', 30)
+
 fontBunOut10 = ImageFont.truetype('/usr/share/fonts/truetype/google/BungeeOutline-Regular.ttf', 10)
 fontBunOut15 = ImageFont.truetype('/usr/share/fonts/truetype/google/BungeeOutline-Regular.ttf', 15)
 fontBunOut20 = ImageFont.truetype('/usr/share/fonts/truetype/google/BungeeOutline-Regular.ttf', 20)
 fontBunOut25 = ImageFont.truetype('/usr/share/fonts/truetype/google/BungeeOutline-Regular.ttf', 25)
 fontBunOut30 = ImageFont.truetype('/usr/share/fonts/truetype/google/BungeeOutline-Regular.ttf', 30)
+
 fontBunShad10 = ImageFont.truetype('/usr/share/fonts/truetype/google/BungeeShade-Regular.ttf', 10)
 fontBunShad15 = ImageFont.truetype('/usr/share/fonts/truetype/google/BungeeShade-Regular.ttf', 15)
 fontBunShad20 = ImageFont.truetype('/usr/share/fonts/truetype/google/BungeeShade-Regular.ttf', 20)
 fontBunShad25 = ImageFont.truetype('/usr/share/fonts/truetype/google/BungeeShade-Regular.ttf', 25)
 fontBunShad30 = ImageFont.truetype('/usr/share/fonts/truetype/google/BungeeShade-Regular.ttf', 30)
+
 fontJacq10 = ImageFont.truetype('/usr/share/fonts/truetype/google/JacquesFrancoisShadow-Regular.ttf', 10)
 fontJacq15 = ImageFont.truetype('/usr/share/fonts/truetype/google/JacquesFrancoisShadow-Regular.ttf', 15)
 fontJacq20 = ImageFont.truetype('/usr/share/fonts/truetype/google/JacquesFrancoisShadow-Regular.ttf', 20)
 fontJacq25 = ImageFont.truetype('/usr/share/fonts/truetype/google/JacquesFrancoisShadow-Regular.ttf', 25)
 fontJacq30 = ImageFont.truetype('/usr/share/fonts/truetype/google/JacquesFrancoisShadow-Regular.ttf', 30)
+
 fontLonOut10 = ImageFont.truetype('/usr/share/fonts/truetype/google/LondrinaOutline-Regular.ttf', 10)
 fontLonOut15 = ImageFont.truetype('/usr/share/fonts/truetype/google/LondrinaOutline-Regular.ttf', 15)
 fontLonOut20 = ImageFont.truetype('/usr/share/fonts/truetype/google/LondrinaOutline-Regular.ttf', 20)
 fontLonOut25 = ImageFont.truetype('/usr/share/fonts/truetype/google/LondrinaOutline-Regular.ttf', 25)
 fontLonOut30 = ImageFont.truetype('/usr/share/fonts/truetype/google/LondrinaOutline-Regular.ttf', 30)
+
 fontLonShad10 = ImageFont.truetype('/usr/share/fonts/truetype/google/LondrinaShadow-Regular.ttf', 10)
 fontLonShad15 = ImageFont.truetype('/usr/share/fonts/truetype/google/LondrinaShadow-Regular.ttf', 15)
 fontLonShad20 = ImageFont.truetype('/usr/share/fonts/truetype/google/LondrinaShadow-Regular.ttf', 20)
 fontLonShad25 = ImageFont.truetype('/usr/share/fonts/truetype/google/LondrinaShadow-Regular.ttf', 25)
 fontLonShad30 = ImageFont.truetype('/usr/share/fonts/truetype/google/LondrinaShadow-Regular.ttf', 30)
+
 fontLonSke10 = ImageFont.truetype('/usr/share/fonts/truetype/google/LondrinaSketch-Regular.ttf', 10)
 fontLonSke15 = ImageFont.truetype('/usr/share/fonts/truetype/google/LondrinaSketch-Regular.ttf', 15)
 fontLonSke20 = ImageFont.truetype('/usr/share/fonts/truetype/google/LondrinaSketch-Regular.ttf', 20)
@@ -100,6 +111,7 @@ fontOswReg15 = ImageFont.truetype('/usr/share/fonts/truetype/google/Oswald-Regul
 fontOswReg20 = ImageFont.truetype('/usr/share/fonts/truetype/google/Oswald-Regular.ttf', 20)
 fontOswReg25 = ImageFont.truetype('/usr/share/fonts/truetype/google/Oswald-Regular.ttf', 25)
 fontOswReg30 = ImageFont.truetype('/usr/share/fonts/truetype/google/Oswald-Regular.ttf', 30)
+
 fontOswBol10 = ImageFont.truetype('/usr/share/fonts/truetype/google/Oswald-Bold.ttf', 10)
 fontOswBol15 = ImageFont.truetype('/usr/share/fonts/truetype/google/Oswald-Bold.ttf', 15)
 fontOswBol20 = ImageFont.truetype('/usr/share/fonts/truetype/google/Oswald-Bold.ttf', 20)
@@ -111,6 +123,7 @@ fontVastShad15 = ImageFont.truetype('/usr/share/fonts/truetype/google/VastShadow
 fontVastShad20 = ImageFont.truetype('/usr/share/fonts/truetype/google/VastShadow-Regular.ttf', 20)
 fontVastShad25 = ImageFont.truetype('/usr/share/fonts/truetype/google/VastShadow-Regular.ttf', 25)
 fontVastShad30 = ImageFont.truetype('/usr/share/fonts/truetype/google/VastShadow-Regular.ttf', 30)
+
 
 
 def TransformLatLongToXY(lat, lon):
@@ -144,7 +157,7 @@ def PeopleInSpace():
     draw = ImageDraw.Draw(HBlackImage)
     draw.text((25, 10), stringToShow1, font = fontBunIn20, fill = 254)
     #draw.text((25, 60), stringToShow2, font = fontVastShad10, fill = 0)
-    draw.text((25, 60), stringToShow2, font = fontOswBol15, fill = 0)
+    draw.text((25, 50), stringToShow2, font = fontOswBol15, fill = 0)
     
     # Paint all on the screen
     epd.display(epd.getbuffer(HBlackImage))
@@ -152,7 +165,7 @@ def PeopleInSpace():
 
     
     
-def WhereIsIIS():
+def WhereIsIIS(ISS):
     url = "http://api.open-notify.org/iss-now.json"
     response = urllib.request.urlopen(url)
     result = json.loads(response.read())
@@ -167,12 +180,14 @@ def WhereIsIIS():
   
     ISSlat = float(result['iss_position']['latitude'])
     ISSlon = float(result['iss_position']['longitude'])
-        
+       
+    ISS.positions.append((ISSlat, ISSlon))
+    print(ISS.positions)
+    
     #Output informationon screen
     print("\nLatitude: " + str(lat))
     print("Longitude: " +str(lon))
-    print(str(actualDay))
-    print(str(actualTime))
+    print(str(actualDay) + ' - ' + str(actualTime) + '\n')
     
     stringToShow1 = actualDay #+ "\n  " + actualTime
     stringToShow2 = actualTime
@@ -197,6 +212,27 @@ def WhereIsIIS():
     
     HBlackImage.paste(issLogo, ((int)(x-10), (int)(y-10)))
     
+    print('[]: ' + str(len(ISS.positions)))
+    if (len(ISS.positions) > 250): #250 is a good number to have almost one turn 
+        del ISS.positions[1]
+    
+    
+    for i,t in enumerate(ISS.positions):
+        (ISSlat, ISSlon) = t
+        (x, y) = TransformLatLongToXY(ISSlat, ISSlon)
+        
+        if (((i+1) % (15*60/30)) == 0):
+            print('X ')
+            #print()
+            s = 2
+            draw.rectangle((x-s, y-s, x+s, y+s), fill = 0)
+        else:
+            print('0 ', end = '')
+            s = 1
+            draw.ellipse((x-s, y-s, x+s, y+s), outline = 0)
+        
+    print()
+    
     # Paint all on the screen
     epd.display(epd.getbuffer(HBlackImage))
 
@@ -214,9 +250,11 @@ def MoonPhase():
     monthName = result['monthName']    
     daysData = result['phase']
     dayNumber = now.day
-    print(daysData)
+    #print(daysData)
     dayData = daysData[str(dayNumber)]
-    phaseName = dayData['phaseName']    
+    print(dayData)
+    phaseName = dayData['phaseName']
+    phaseNameText = dayData['npWidget']
     lighting = dayData['lighting']
     lightRounded = round(lighting, 1)
     distance = dayData['dis']
@@ -245,7 +283,8 @@ def MoonPhase():
     print('** ** ** ** ** ** ** **')
     print('Month: ' + str(monthName))
     print('Day: ' + str(dayNumber))
-    print('Phase: ' + str(phaseName))
+    print('Phase: ' + str(phaseNameText))
+    print('PhaseText: ' + str(phaseName))
     print('Lighting: ' + str(lighting) + '%')    
     print('Lighting: ' + str(lightRounded) + '%')
     print('Distance: ' + str(distance) + 'Km')
@@ -259,20 +298,24 @@ def MoonPhase():
     if (phaseName=="New Moon"):
         photoMoon = 'Moon/phase_0.bmp'
     elif (phaseName=="Waxing"):
-        photoMoon = 'Moon/phase_C-25.bmp'
+        if (lightRounded > 0) and (lightRounded < 50): 
+            photoMoon = 'Moon/phase_C-25.bmp'
+        else:
+            photoMoon = 'Moon/phase_C-75.bmp'
     elif (phaseName=="First quarter"):
         photoMoon = 'Moon/phase_C_50.bmp'
-    elif (phaseName=="Waxing"):
-        photoMoon = 'Moon/phase_C-75.bmp'
     elif (phaseName=="Full moon"):
         photoMoon = 'Moon/phase_100.bmp'
     elif (phaseName=="Waning"):
-        photoMoon = 'Moon/phase_D-25.bmp'
+        if (lightRounded > 50) and (lightRounded < 100): 
+            photoMoon = 'Moon/phase_D-25.bmp'
+        else:
+            photoMoon = 'Moon/phase_D-75.bmp'
     elif (phaseName=="Last quarter"):
         photoMoon = 'Moon/phase_D-50.bmp'
-    elif (phaseName=="Waning"):
-        photoMoon = 'Moon/phase_D-75.bmp'
     
+        
+    print('Photo: ' + photoMoon)
     
     
     HBlackImage = Image.new('1', (epd2in7.EPD_HEIGHT, epd2in7.EPD_WIDTH), 255)  # 298*176
@@ -303,7 +346,7 @@ def MoonPhase():
     
     
     
-def weatherForecast():
+def WeatherForecast():
     url = "http://api.openweathermap.org/data/2.5/forecast?"
     #url = url + "q={city_name}" 
     #url = url + "q=Düsseldorf"        # ASCII problems  !!!
@@ -581,7 +624,7 @@ def handleBtnPress(btn):
     if (pinNum==5):        
         #printToDisplay('This is my first \nRPi eInk project.')
         btn.timePressed.value = 0
-        weatherForecast()
+        WeatherForecast()
         btn.timePressed.value = 0
     elif (pinNum==6):
         btn.timePressed.value = 0
@@ -591,7 +634,7 @@ def handleBtnPress(btn):
         btn.timePressed.value = 0        
     elif (pinNum==13):
         btn.timePressed.value = 0
-        WhereIsIIS()
+        WhereIsIIS(btn.ISS)
         btn.timePressed.value = 0
         time.sleep(2)
         btn.timePressed.value = 0
@@ -624,7 +667,7 @@ while True:
             print('5........' + str(Button.timePressed.value) + ' / ' + str(timeToRefeshBtn1))
             if (Button.timePressed.value >= timeToRefeshBtn1):
                 Button.timePressed.value = 0
-                weatherForecast()
+                WeatherForecast()
                 
         if (Button.buttonNumber.value == 6):
             print('6........' + str(Button.timePressed.value) + ' / ' + str(timeToRefeshBtn2))
@@ -636,7 +679,7 @@ while True:
             print('13.......' + str(Button.timePressed.value) + ' / ' + str(timeToRefeshBtn3))
             if (Button.timePressed.value >= timeToRefeshBtn3):
                 Button.timePressed.value = 0
-                WhereIsIIS()
+                WhereIsIIS(Button.ISS)
         
         if (Button.buttonNumber.value == 19):
             print('19.......' + str(Button.timePressed.value) + ' / ' + str(timeToRefeshBtn4))
@@ -648,4 +691,3 @@ while True:
     except KeyboardInterrupt: 
         epd2in7.epdconfig.module_exit()
         exit()
-        
