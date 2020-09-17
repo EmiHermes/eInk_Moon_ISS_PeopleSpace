@@ -31,10 +31,28 @@ This is a good project to be used with the eInk screen.
 ![Weather](WeatherForecast.jpg?raw=true "Weather Forecast")
 
 
+
+
+Edit the file "**ShowInfo.py**" to insert your API-Token from OpenWeather.com....
+...and the City (use the name or the ID of the city):
+
+```
+def WeatherForecast():
+    url = "http://api.openweathermap.org/data/2.5/forecast?"
+    #url = url + "q={city_name}" 
+    #url = url + "q=Düsseldorf"        # ASCII problems  !!!
+    url = url + "id=2934246"
+    #url = url + "&appid={your_API_key}" 
+    url = url + "&units=metric"        # In Metric 
+    url = url + "&cnt=6"               # Only 6 results
+```
+
 Needed things:
 - **Raspberry PI** (Zero is enough).
 - **2.7inch e-Paper HAT**. (I bought mine here: https://www.amazon.de/gp/product/B07FFMH858/ref=ppx_yo_dt_b_asin_title_o04_s00)
 - **SD** card (4Gb is enough).
+
+You also need a Token from OpenWeather to use them APIs (from https://openweathermap.org/api)
 
 
 Installation:
