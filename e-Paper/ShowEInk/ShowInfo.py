@@ -161,7 +161,7 @@ def PeopleInSpace():
     
     # Paint all on the screen
     epd.display(epd.getbuffer(HBlackImage))
-
+    epd.sleep()
 
     
     
@@ -235,7 +235,7 @@ def WhereIsIIS(ISS):
     
     # Paint all on the screen
     epd.display(epd.getbuffer(HBlackImage))
-
+    epd.sleep()
 
     
 def MoonPhase():
@@ -342,7 +342,7 @@ def MoonPhase():
     
     # Paint all on the screen
     epd.display(epd.getbuffer(HBlackImage))
-    
+    epd.sleep()
     
     
     
@@ -587,7 +587,7 @@ def WeatherForecast():
     
     # Paint all on the screen
     epd.display(epd.getbuffer(HBlackImage))
-    
+    epd.sleep()
     
     
     
@@ -608,7 +608,7 @@ def printToDisplay(string):
     # if we did not add anything to one of them
     epd.display(epd.getbuffer(HBlackImage))
     print('*****4')
-    
+    epd.sleep()
     
 # Select a pressed button
 def handleBtnPress(btn):
